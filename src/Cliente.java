@@ -8,7 +8,7 @@ import java.util.Random;
 public class Cliente implements Runnable{
 
     private String nombre;
-    private int intCajaDeCliente;
+    //private int intCajaDeCliente;
     private Caja cajaDeCliente;
     boolean flag = false;
     private long espera;
@@ -16,7 +16,7 @@ public class Cliente implements Runnable{
     //constructor
     public Cliente(String nombre, int intCajaDeCliente, Caja cajaDeCliente){
         this.nombre = nombre;
-        this.intCajaDeCliente = intCajaDeCliente;
+        //this.intCajaDeCliente = intCajaDeCliente;
         this.cajaDeCliente = cajaDeCliente;
     }
 
@@ -24,10 +24,10 @@ public class Cliente implements Runnable{
     public long getEspera() {
         return espera;
     }
-
+/*
     public int getIntCajaDeCliente() {
         return intCajaDeCliente;
-    }
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -46,20 +46,20 @@ public class Cliente implements Runnable{
             espera = rnd.nextInt(1000);
             Thread.sleep(espera);//tiempo de compra aleatorio
             System.out.println(nombre + " compra");
-
+/*
             if(cajaDeCliente.getArrayCaixes()[intCajaDeCliente]){//si la caja esta ocupada (ocupada = true)
                 flag = true;
                 System.out.println("..." + nombre + " EN ESPERA");
-                //wait();//////////////////////////////////////////
-            }
+                wait();
+            }*/
 
             cajaDeCliente.cobra(this);
-
+/*
             if(flag){
                 System.out.println("...Caja " + intCajaDeCliente + " REACTIVADA");
-                //notify();//////////////////////////////////////////
+                notify();
                 flag = false;
-            }
+            }*/
 
         } catch (InterruptedException e) {
             e.printStackTrace();

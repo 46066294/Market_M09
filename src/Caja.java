@@ -12,7 +12,7 @@ public class Caja {
     public Caja(int numCaixes){
         this.arrayCaixes = new boolean[numCaixes];//se crean las cajas
         for(int i = 0; i < numCaixes; i++){
-            arrayCaixes[i] = false;
+            arrayCaixes[i] = true;
         }
         this.numCaixes = numCaixes;
     }
@@ -30,15 +30,23 @@ public class Caja {
      */
     public synchronized void cobra(Cliente c) throws InterruptedException {
 
-        if(!arrayCaixes[c.getIntCajaDeCliente()]){//si esa caja esta desocupada (false == desocupada)
-            long esperaEnCaja = c.getEspera() / (long)500;
-            arrayCaixes[c.getIntCajaDeCliente()] = true;
-            Thread.sleep(esperaEnCaja);//meitat de temps proporcional de compra a la caixa
-            System.out.println("Caja " + c.getIntCajaDeCliente() + ": Cobrado a " + c.getNombre() +
+        for(int i = 0; i < arrayCaixes.length; i++){
+            if(arrayCaixes[i]){
+                //arrayCaixes[c.getIntCajaDeCliente()] = false;
+                arrayCaixes[i] = false;
+                //long esperaEnCaja = c.getEspera() / (long)500;
+                //Thread.sleep(esperaEnCaja);//meitat de temps proporcional de compra a la caixa
+                System.out.println("Caja " + i + ": Cobrado a " + c.getNombre() +
                    /* " Tiempo de espera en caja: " + esperaEnCaja + " seg/2" +*/
-                    "\n\tTiempo medio de espera del cliente: " + ((c.getEspera() + esperaEnCaja)/2) + " seg/2");
+                        "\n\tTiempo medio de espera del cliente: "/* + ((c.getEspera() + esperaEnCaja) / 2) + " seg/2"*/);
 
-            arrayCaixes[c.getIntCajaDeCliente()] = false;
+                arrayCaixes[i] = true;
+                notifyAll();
+            }
+            else{
+                System.out.println("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIT");
+                wait();
+            }
         }
 
     }
