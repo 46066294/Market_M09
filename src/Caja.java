@@ -5,10 +5,6 @@ import java.util.Random;
  */
 public class Caja {
 
-    public boolean[] getArrayCaixes() {
-        return arrayCaixes;
-    }
-
     private boolean[] arrayCaixes;
     private int numCaixes;
 
@@ -19,6 +15,11 @@ public class Caja {
             arrayCaixes[i] = false;
         }
         this.numCaixes = numCaixes;
+    }
+
+    //getter
+    public boolean[] getArrayCaixes() {
+        return arrayCaixes;
     }
 
     /**
@@ -36,10 +37,10 @@ public class Caja {
             System.out.println("Caja " + c.getIntCajaDeCliente() + ": Cobrado a " + c.getNombre() +
                    /* " Tiempo de espera en caja: " + esperaEnCaja + " seg/2" +*/
                     "\n\tTiempo medio de espera del cliente: " + ((c.getEspera() + esperaEnCaja)/2) + " seg/2");
+
             arrayCaixes[c.getIntCajaDeCliente()] = false;
         }
 
     }
-
 
 }

@@ -50,14 +50,14 @@ public class Cliente implements Runnable{
             if(cajaDeCliente.getArrayCaixes()[intCajaDeCliente]){//si la caja esta ocupada (ocupada = true)
                 flag = true;
                 System.out.println("..." + nombre + " EN ESPERA");
-                //wait();
+                //wait();//////////////////////////////////////////
             }
 
             cajaDeCliente.cobra(this);
 
             if(flag){
                 System.out.println("...Caja " + intCajaDeCliente + " REACTIVADA");
-                //notify();
+                //notify();//////////////////////////////////////////
                 flag = false;
             }
 
